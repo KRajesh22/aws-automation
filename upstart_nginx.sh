@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ -z "$1" ]]
+if [ -z "$1" ]
 then
   echo "Please enter an app name"
   read APP_NAME;
@@ -10,7 +10,7 @@ else
   APP_NAME=$1;
 fi
 
-if [[ -z "$2" ]]
+if [ -z "$2" ]
 then
   echo "Please enter an app port"
   read APP_PORT;
@@ -18,7 +18,7 @@ else
   APP_PORT=$2;
 fi
 
-if [[ -z "$3" ]]
+if [ -z "$3" ]
 then
   echo "Please enter an app domain name"
   read APP_DOMAIN;
@@ -26,7 +26,7 @@ else
   APP_DOMAIN=$3;
 fi
 
-if [[ -z "$4" ]]
+if [ -z "$4" ]
 then
   echo "Please enter the user to run the service";
   read APP_USER;
@@ -34,7 +34,7 @@ else
   APP_USER=$4;
 fi
 
-if [[ -z "$5" ]]
+if [ -z "$5" ]
 then
   echo "Node or Unicorn?"
   read APP_TYPE;
