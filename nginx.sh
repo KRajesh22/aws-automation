@@ -26,11 +26,12 @@ else
 fi
 
 NGINX_FILE="/etc/nginx/sites-enabled/$APP_NAME"
-curl -s http://raw.github.com/juliangiuca/automation_scripts/nginx.conf \
-  | sed "s/APP_NAME/$APP_NAME/" \
-  | sed "s/APP_PORT/$APP_PORT/" \
-  | sed "s/APP_DOMAIN/$APP_DOMAIN/" \
-  > $NGINX_FILE
+sudo sh -c "curl -s http://raw.github.com/juliangiuca/automation_scripts/nginx.conf \
+  | sed \"s/APP_NAME/$APP_NAME/\" \
+  | sed \"s/APP_PORT/$APP_PORT/\" \
+  | sed \"s/APP_DOMAIN/$APP_DOMAIN/\" \
+  > $NGINX_FILE"
+
 
 
 
