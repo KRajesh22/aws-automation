@@ -49,14 +49,14 @@ sudo mkdir -p /data/$APP_NAME
 sudo chown -R $APP_USER /data/$APP_NAME
 
 NGINX_FILE="/etc/nginx/sites-enabled/$APP_NAME"
-sudo sh -c "curl -s http://raw.github.com/juliangiuca/automation_scripts/nginx.conf \
+sudo sh -c "curl -s http://raw.github.com/juliangiuca/aws_automation/conf/nginx.conf \
   | sed \"s/APP_NAME/$APP_NAME/\" \
   | sed \"s/APP_PORT/$APP_PORT/\" \
   | sed \"s/APP_DOMAIN/$APP_DOMAIN/\" \
   > $NGINX_FILE"
 
 UPSTART_FILE="/etc/init/$APP_NAME.conf"
-sudo sh -c "curl -s http://raw.github.com/juliangiuca/automation_scripts/upstart_$APP_TYPE.conf \
+sudo sh -c "curl -s http://raw.github.com/juliangiuca/aws_automation/conf/upstart_$APP_TYPE.conf \
   | sed \"s/APP_NAME/$APP_NAME/\" \
   | sed \"s/APP_PORT/$APP_PORT/\" \
   | sed \"s/AUTHOR/$AUTHOR/\" \
