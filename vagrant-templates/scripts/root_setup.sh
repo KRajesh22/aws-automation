@@ -22,7 +22,7 @@ sudo sed -i -e 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 sudo sed -i -e 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 # iptables
-sudo wget -q -N https://raw.github.com/juliangiuca/aws_automation/master/iptables.firewall.rules > /etc/iptables.firewall.rules -P /etc
+sudo wget -q -N https://raw.github.com/juliangiuca/aws_automation/master/iptables.firewall.rules -P /etc
 sudo bash -c 'printf "#!/bin/sh\n/sbin/iptables-restore < /etc/iptables.firewall.rules\n" > /etc/network/if-pre-up.d/firewall'
 sudo chmod +x /etc/network/if-pre-up.d/firewall
 
