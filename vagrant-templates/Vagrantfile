@@ -19,6 +19,9 @@ $script=<<SCRIPT
   sudo su emailer -c "ssh-keygen -f /home/emailer/.ssh/id_rsa -N #{ENV['SSH_PASSPHRASE']}"
   sudo su emailer -c "echo '#{@id_rsa_pub}' >> /home/emailer/.ssh/authorized_keys"
 
+  sudo su emailer -c "ln -s /data/emailer/current /home/emailer/emailer"
+  sudo su emailer -c "ln -s /data/tracker/current /home/emailer/tracker"
+
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 inoccuous.me emailer unicorn
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 inoccuous.me emailer node
 SCRIPT

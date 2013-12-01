@@ -8,6 +8,10 @@ sudo apt-get install -yq git
 sudo apt-get -y -q install curl wget vim
 sudo apt-get -y -q install gawk libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev libxml2-dev libxslt-dev libxml2
 
+# Redis
+echo "Installing Redis"
+sudo apt-get -y -q install redis-server
+
 echo "Install Postgresql"
 sudo apt-get -y -q install postgresql libpq-dev postgresql-contrib
 
