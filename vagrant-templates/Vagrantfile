@@ -7,6 +7,7 @@ require 'dotenv'
 Dotenv.load
 
 VAGRANTFILE_API_VERSION = "2"
+@id_rsa_pub = File.read(File.expand_path("~/.ssh/id_rsa.pub")).strip
 
 $script=<<SCRIPT
   echo "Adding user emailer"
@@ -16,6 +17,7 @@ $script=<<SCRIPT
   sudo usermod -a -G rvm emailer
   sudo usermod -s /bin/bash emailer
   sudo su emailer -c "ssh-keygen -f /home/emailer/.ssh/id_rsa -N #{ENV['SSH_PASSPHRASE']}"
+  sudo su emailer -c "echo '#{@id_rsa_pub}' >> /home/emailer/.ssh/authorized_keys"
 
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 inoccuous.me emailer unicorn
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 inoccuous.me emailer node
