@@ -22,8 +22,15 @@ $script=<<SCRIPT
   sudo su emailer -c "ln -s /data/emailer/current /home/emailer/emailer"
   sudo su emailer -c "ln -s /data/tracker/current /home/emailer/tracker"
 
+  echo "Setting up nginx and upstart"
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 inoccuous.me emailer unicorn
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 inoccuous.me emailer node
+
+  # Set up secret files for my applications
+  sudo su emailer -c "mkdir -p /data/emailer/shared/config"
+  sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/database.production.rb -O /data/emailer/shared/config/database.rb"
+  sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/email.production.rb -O /data/emailer/shared/config/email.rb"
+  echo "Done"
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|

@@ -4,12 +4,11 @@ set -e
 
 # Updating and Upgrading dependencies
 
-echo "apt updating"
+echo "apt updating (and dist updating - this will take a while)"
 sudo apt-get update -yq > /dev/null
-sudo apt-get upgrade -yq > /dev/null
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade > /dev/null
 
 sudo apt-get -y -q install linux-headers-$(uname -r) build-essential dkms nfs-common
-sudo apt-get update -yq --fix-missing
 
 # Setup sudo to allow no-password sudo for "admin"
 sudo cp /etc/sudoers /etc/sudoers.orig
