@@ -24,7 +24,8 @@ $script=<<SCRIPT
 
   echo "Setting up nginx and upstart"
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 inoccuous.me emailer unicorn
-  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 inoccuous.me emailer node
+  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 i.inoccuous.me emailer node
+  sudo /etc/init.d/nginx restart
 
   # Set up secret files for my applications
   sudo su emailer -c "mkdir -p /data/emailer/shared/config"
