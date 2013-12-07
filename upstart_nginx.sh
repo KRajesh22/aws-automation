@@ -75,6 +75,8 @@ if [[ "$WEB_SERVER" == "unicorn" ]]; then
     | sed \"s/AUTHOR/$AUTHOR/g\" \
     | sed \"s/APP_USER/$APP_USER/g\" \
     > $UNICORN_INIT_FILE"
+  sudo chown $APP_USER $UNICORN_INIT_FILE
+  sudo -u emailer chmod +x $UNICORN_INIT_FILE
 fi
 
 
