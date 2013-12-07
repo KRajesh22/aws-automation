@@ -66,7 +66,7 @@ sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/
 
 WEB_SERVER="$(tr [A-Z] [a-z] <<< "$APP_TYPE")"
 if [[ "$WEB_SERVER" == "unicorn" ]]; then
-  UNICORN_INIT_FILE="/data/$APP_NAME/shared/unicorn/unicorn.sh"
+  UNICORN_INIT_FILE="/data/$APP_NAME/shared/unicorn.sh"
   sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/scripts/unicorn.sh \
     | sed \"s/APP_NAME/$APP_NAME/g\" \
     | sed \"s/APP_PORT/$APP_PORT/g\" \
