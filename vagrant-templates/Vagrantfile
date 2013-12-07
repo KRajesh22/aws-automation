@@ -29,8 +29,11 @@ $script=<<SCRIPT
 
   # Set up secret files for my applications
   sudo su emailer -c "mkdir -p /data/emailer/shared/config"
-  sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/database.production.rb -O /data/emailer/shared/config/database.rb"
-  sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/email.production.rb -O /data/emailer/shared/config/email.rb"
+  sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/settings.production.rb -O /data/emailer/shared/config/settings.json"
+
+  sudo -u postgres psql -c "CREATE DATABASE emailer_production;"
+  sudo -u postgres psql -c "CREATE USER emailer; GRANT ALL PRIVILEGES ON DATABASE emailer_production TO emailer"
+
   echo "Done"
 SCRIPT
 
@@ -52,6 +55,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type             = "t1.micro"
 
     aws.security_groups           = ["web"]
+    aws.tags                      = { "Innocuous" => true }
 
     override.ssh.username         = "ubuntu"
     override.ssh.private_key_path = ENV["SSH_KEY_PATH"]

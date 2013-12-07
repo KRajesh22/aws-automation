@@ -27,6 +27,7 @@ sudo apt-get update
 
 echo "Installing nginx"
 sudo apt-get -y -q install nginx
+sudo rm /etc/nginx/sites-enabled/default
 
 echo "Installing NodeJS"
 sudo apt-get -y -q install nodejs
