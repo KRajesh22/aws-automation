@@ -63,7 +63,7 @@ sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/
   | sed \"s/APP_USER/$APP_USER/g\" \
   > $UPSTART_FILE"
 
-if [ $APP_TYPE == "Unicorn" ]
+if [ $APP_TYPE == "Unicorn" ]; then
   UNICORN_INIT_FILE="/data/$APP_NAME/shared/unicorn/unicorn.sh"
   sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/scripts/unicorn.sh \
     | sed \"s/APP_NAME/$APP_NAME/g\" \
