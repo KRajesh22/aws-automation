@@ -23,8 +23,8 @@ $script=<<SCRIPT
   sudo su emailer -c "ln -s /data/tracker/current /home/emailer/tracker"
 
   echo "Setting up nginx and upstart"
-  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 inoccuous.me emailer unicorn
-  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 i.inoccuous.me emailer node
+  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 innocuous.me emailer unicorn
+  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 i.innocuous.me emailer node
   sudo /etc/init.d/nginx restart
 
   # Set up secret files for my applications
