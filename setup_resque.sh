@@ -24,7 +24,7 @@ then
   echo "Please enter the user to run the service";
   read APP_WORKER_COUNT;
 else
-  APP_WORKER_COUNT=$2;
+  APP_WORKER_COUNT=$3;
 fi
 
 RESQUE_WORKER_FILE="/etc/init/$APP_NAME-worker.conf"
