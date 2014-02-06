@@ -33,6 +33,7 @@ $script+=<<SCRIPT
   echo "Setting up nginx and upstart"
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s emailer 9001 innocuous.me emailer unicorn
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s tracker 9002 i.innocuous.me tracker node
+  wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/upstart_nginx.sh | bash -s bindislist 9003 bindislist.com bindislist unicorn
   wget -q -O - https://raw.github.com/juliangiuca/aws_automation/master/setup_resque.sh | bash -s emailer emailer 1
   sudo /etc/init.d/nginx restart
 
