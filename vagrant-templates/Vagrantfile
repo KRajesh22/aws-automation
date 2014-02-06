@@ -42,9 +42,9 @@ $script+=<<SCRIPT
   sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/settings.production.rb -O /data/emailer/shared/config/settings.json"
   sudo su bindislist -c "mkdir -p /data/bindislist/shared/config"
 
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -c "CREATE DATABASE emailer_production;"
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -c "CREATE USER emailer; GRANT ALL PRIVILEGES ON DATABASE emailer_production TO emailer"
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -c "CREATE USER bindislist; GRANT ALL PRIVILEGES ON DATABASE bindislist_production TO bindislist"
+  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE DATABASE emailer_production;"
+  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER emailer; GRANT ALL PRIVILEGES ON DATABASE emailer_production TO emailer"
+  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER bindislist; GRANT ALL PRIVILEGES ON DATABASE bindislist_production TO bindislist"
 
   echo "Done"
 SCRIPT
