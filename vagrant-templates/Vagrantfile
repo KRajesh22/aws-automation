@@ -53,7 +53,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.secret_access_key         = ENV["AWS_KEY"]
     aws.keypair_name              = "lappy"
     aws.region                    = "us-west-1"
-    aws.instance_type             = "t1.micro"
+    aws.instance_type             = "m1.small"
 
     aws.security_groups           = ["web"]
     aws.tags                      = { "Innocuous" => true }
