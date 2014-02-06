@@ -12,11 +12,11 @@ sudo apt-get -y -q install gawk libreadline6-dev zlib1g-dev libssl-dev libyaml-d
 echo "Installing Redis"
 sudo apt-get -y -q install redis-server
 
-echo "Install Postgresql"
-sudo apt-get -y -q install postgresql libpq-dev postgresql-contrib
+#echo "Install Postgresql"
+#sudo apt-get -y -q install postgresql libpq-dev postgresql-contrib
 
 # Set Password to test for user postgres
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'test';"
+#sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'test';"
 
 echo "Adding add-apt-repository"
 # Node.js Setup
