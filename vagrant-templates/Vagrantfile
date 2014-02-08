@@ -14,18 +14,18 @@ $script=<<SCRIPT
   sudo addgroup www
 SCRIPT
 
-  %w(emailer tracker bindislist).each do |user|
+%w(emailer tracker bindislist).each do |user|
 $script+=<<SCRIPT
-    sudo useradd -d /home/#{user} -m #{user}
-    sudo usermod -a -G www #{user}
-    sudo usermod -s /bin/bash #{user}
-    sudo su emailer -c "ssh-keygen -f /home/#{user}/.ssh/id_rsa -N #{ENV['SSH_PASSPHRASE']}"
-    sudo su emailer -c "echo '#{@id_rsa_pub}' >> /home/#{user}/.ssh/authorized_keys"
+  sudo useradd -d /home/#{user} -m #{user}
+  sudo usermod -a -G www #{user}
+  sudo usermod -s /bin/bash #{user}
+  sudo su #{user} -c "ssh-keygen -f /home/#{user}/.ssh/id_rsa -N #{ENV['SSH_PASSPHRASE']}"
+  sudo su #{user} -c "echo '#{@id_rsa_pub}' >> /home/#{user}/.ssh/authorized_keys"
+  sudo usermod -a -G rvm #{user}
 SCRIPT
-  end
+end
 
 $script+=<<SCRIPT
-  sudo usermod -a -G rvm emailer
   sudo su emailer -c "ln -s /data/emailer/current /home/emailer/emailer"
   sudo su tracker -c "ln -s /data/tracker/current /home/tracker/tracker"
   sudo su bindislist -c "ln -s /data/bindislist/current /home/bindislist/bindislist"
@@ -42,9 +42,10 @@ $script+=<<SCRIPT
   sudo su emailer -c "wget --user=#{ENV['BITBUCKET_USER']} --password='#{ENV['BITBUCKET_PASSWORD']}' -q -N https://bitbucket.org/localtoast/secret-files/raw/master/emailer/settings.production.rb -O /data/emailer/shared/config/settings.json"
   sudo su bindislist -c "mkdir -p /data/bindislist/shared/config"
 
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE DATABASE emailer_production;"
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER emailer; GRANT ALL PRIVILEGES ON DATABASE emailer_production TO emailer"
-  sudo -u postgres psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER bindislist; GRANT ALL PRIVILEGES ON DATABASE bindislist_production TO bindislist"
+  PGPASSWORD='#{ENV['RDS_PASSWORD']}' psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE DATABASE emailer_production;" postgres
+  PGPASSWORD='#{ENV['RDS_PASSWORD']}' psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE DATABASE bindislist_production;" postgres
+  PGPASSWORD='#{ENV['RDS_PASSWORD']}' psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER emailer; GRANT ALL PRIVILEGES ON DATABASE emailer_production TO emailer" postgres
+  PGPASSWORD='#{ENV['RDS_PASSWORD']}' psql -h #{ENV['RDS_ADDRESS']} -U root -c "CREATE USER bindislist; GRANT ALL PRIVILEGES ON DATABASE bindislist_production TO bindislist" postgres
 
   echo "Done"
 SCRIPT

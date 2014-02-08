@@ -6,8 +6,8 @@ require 'debugger'
 Dotenv.load
 
 AWS.config(access_key_id: ENV["AWS_ID"], secret_access_key: ENV["AWS_KEY"], region: 'us-west-1')
-running = AWS.ec2.instances.find_all { |instance| instance.status == :running }
-innocuous_instances = running.find_all { |instance| instance.tags.include?("Innocuous") }
+running_ec2 = AWS.ec2.instances.find_all { |instance| instance.status == :running }
+innocuous_instances = running_ec2.find_all { |instance| instance.tags.include?("Innocuous") }
 raise "Too many instances" if innocuous_instances.count > 1
 
 innocuous_instances.each do |ec2|

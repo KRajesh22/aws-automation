@@ -12,8 +12,9 @@ sudo apt-get -y -q install gawk libreadline6-dev zlib1g-dev libssl-dev libyaml-d
 echo "Installing Redis"
 sudo apt-get -y -q install redis-server
 
-#echo "Install Postgresql"
+echo "Install Postgresql"
 #sudo apt-get -y -q install postgresql libpq-dev postgresql-contrib
+sudo apt-get -y -q install postgresql-client
 
 # Set Password to test for user postgres
 #sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'test';"
@@ -32,6 +33,6 @@ sudo rm /etc/nginx/sites-enabled/default
 echo "Installing NodeJS"
 sudo apt-get -y -q install nodejs
 
-\curl -L https://get.rvm.io | sudo bash -s stable --ruby=ruby-2.0.0-p353 --gems=bundler
+\curl -L https://get.rvm.io | sudo bash -s stable --ruby=ruby-2.1.0 --gems=bundler
 sudo usermod -a -G rvm `whoami`
 source /etc/profile.d/rvm.sh
