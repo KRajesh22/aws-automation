@@ -14,7 +14,7 @@ sudo apt-get -y -q install redis-server
 
 echo "Install Postgresql"
 #sudo apt-get -y -q install postgresql libpq-dev postgresql-contrib
-sudo apt-get -y -q install postgresql-client
+sudo apt-get -y -q install postgresql-client libpq-dev
 
 # Set Password to test for user postgres
 #sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'test';"
