@@ -75,6 +75,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.port             = 18500
   end
 
+  config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = ENV["SSH_KEY_PATH"]
+    override.ssh.port             = 18500
+
+    # override.vm.box = 'digital_ocean'
+    # override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+
+    provider.client_id = ENV['DO_CLIENT_ID']
+    provider.api_key = ENV['DO_API_KEY']
+  end
+
 
   config.vm.provision "shell", inline: $script
 

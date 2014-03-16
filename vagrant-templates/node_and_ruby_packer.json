@@ -1,7 +1,9 @@
 {
   "variables": {
     "aws_access_key": "",
-    "aws_secret_key": ""
+    "aws_secret_key": "",
+    "do_client_id": "",
+    "do_api_key": ""
   },
   "builders": [{
     "type": "amazon-ebs",
@@ -13,6 +15,13 @@
     "ssh_username": "ubuntu",
     "ssh_timeout": "2m",
     "ami_name": "Node and Ruby - Ubuntu {{timestamp}}"
+  },
+  {
+    "type": "digitalocean",
+    "client_id": "{{user `do_client_id`}}",
+    "api_key": "{{user `do_api_key`}}",
+    "region_id": 3,
+    "snapshot_name": "Node and Ruby - Ubuntu {{timestamp}}"
   }],
   "provisioners": [
     {
