@@ -33,3 +33,5 @@ sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/
   | sed \"s/APP_USER/$APP_USER/g\" \
   | sed \"s/APP_WORKER_COUNT/$APP_WORKER_COUNT/g\" \
   > $RESQUE_WORKER_FILE"
+
+sudo chmod +x $RESQUE_WORKER_FILE
