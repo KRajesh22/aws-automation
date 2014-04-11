@@ -29,6 +29,7 @@ BUNDLER="/home/APP_NAME/.rbenv/shims/bundle"
 WORK="./bin/resque work"
 PIDFILE="$ROOT/tmp/pids/resque_worker.%d.pid"
 
+export RAILS_ENV=$ENVIRONMENT
 start() {
 	local program
 	local options
@@ -41,12 +42,12 @@ start() {
 		options="$WORK"
 	fi
 
-	options="$options --queues=$QUEUES --pid_file=$pidfile"
+	options="$options --queues=$QUEUES"
 
 	for i in $(seq 1 $COUNT); do
 		pidfile=$(printf "$PIDFILE" $i)
 
-		if start-stop-daemon --start --background --quiet --pidfile $pidfile --chdir $ROOT --chuid $USER:$GROUP --exec $program -- $options
+		if start-stop-daemon --start --background --quiet --pidfile $pidfile --chdir $ROOT --chuid $USER:$GROUP --exec $program -- $options --pid_file=$pidfile
 		then
 			log_daemon_msg "Starting worker #$i for $NAME ..."
 		else
