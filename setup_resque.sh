@@ -27,11 +27,16 @@ else
   APP_WORKER_COUNT=$3;
 fi
 
-RESQUE_WORKER_FILE="/etc/init.d/$APP_NAME-resque"
-sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/init.d/resque \
+RESQUE_WORKER_FILE="/etc/init/$APP_NAME-resque"
+sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/init/resque.conf \
   | sed \"s/APP_NAME/$APP_NAME/g\" \
   | sed \"s/APP_USER/$APP_USER/g\" \
   | sed \"s/APP_WORKER_COUNT/$APP_WORKER_COUNT/g\" \
   > $RESQUE_WORKER_FILE"
 
-sudo chmod +x $RESQUE_WORKER_FILE
+RESQUE_WORKER_FILE="/etc/init/$APP_NAME-resque-worker"
+sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/init/resque-worker.conf \
+  | sed \"s/APP_NAME/$APP_NAME/g\" \
+  | sed \"s/APP_USER/$APP_USER/g\" \
+  | sed \"s/APP_WORKER_COUNT/$APP_WORKER_COUNT/g\" \
+  > $RESQUE_WORKER_FILE"
