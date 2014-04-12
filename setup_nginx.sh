@@ -59,6 +59,6 @@ UPSTART_FILE="/etc/init/$APP_NAME.conf"
 sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/conf/upstart/$APP_TYPE.conf \
   | sed \"s/APP_NAME/$APP_NAME/g\" \
   | sed \"s/APP_PORT/$APP_PORT/g\" \
-  | sed \"s/AUTHOR/$AUTHOR/g\" \
+  | sed \"s/AUTHOR/$APP_USER/g\" \
   | sed \"s/APP_USER/$APP_USER/g\" \
   > $UPSTART_FILE"
