@@ -48,9 +48,10 @@ AUTHOR=`whoami`
 sudo mkdir -p /data/$APP_NAME
 sudo chown -R $APP_USER /data/$APP_NAME
 
-NGINX_FILE="/etc/nginx/sites-enabled/$APP_NAME"
-sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/conf/nginx.conf \
+UPSTART_FILE="/etc/init/$APP_NAME.conf"
+sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/conf/upstart/$APP_TYPE.conf \
   | sed \"s/APP_NAME/$APP_NAME/g\" \
   | sed \"s/APP_PORT/$APP_PORT/g\" \
-  | sed \"s/APP_DOMAIN/$APP_DOMAIN/g\" \
-  > $NGINX_FILE"
+  | sed \"s/AUTHOR/$APP_USER/g\" \
+  | sed \"s/APP_USER/$APP_USER/g\" \
+  > $UPSTART_FILE"
