@@ -49,7 +49,7 @@ sudo mkdir -p /data/$APP_NAME
 sudo chown -R $APP_USER /data/$APP_NAME
 
 UPSTART_FILE="/etc/init/$APP_NAME.conf"
-sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/conf/upstart/$APP_TYPE.conf \
+sudo sh -c "curl -s -L https://raw.github.com/juliangiuca/aws_automation/master/upstart/$APP_TYPE.conf \
   | sed \"s/APP_NAME/$APP_NAME/g\" \
   | sed \"s/APP_PORT/$APP_PORT/g\" \
   | sed \"s/AUTHOR/$APP_USER/g\" \
