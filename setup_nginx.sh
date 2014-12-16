@@ -34,14 +34,6 @@ else
   APP_USER=$4;
 fi
 
-if [ -z "$5" ]
-then
-  echo "Node or Unicorn?"
-  read APP_TYPE;
-else
-  APP_TYPE=$5;
-fi
-
 AUTHOR=`whoami`
 
 
